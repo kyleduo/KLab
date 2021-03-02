@@ -1,24 +1,29 @@
 package com.kyleduo.app.playground.entry
 
 import android.os.Bundle
-import android.util.Log
-import com.kyleduo.app.playground.common.BaseActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyleduo.app.playground.R
-import com.kyleduo.app.snippets.annotations.Snippet
+import com.kyleduo.app.playground.common.BaseActivity
+import com.kyleduo.app.playground.m.typeface.CustomTypeFaceActivity
+import com.kyleduo.app.playground.model.EntryItem
+import kotlinx.android.synthetic.main.activity_entry.*
 
 class EntryActivity : BaseActivity() {
+
+    private val adapter by lazy { EntryListAdapter() }
+    private val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entry)
 
-        test()
-    }
+        entryList.adapter = adapter
+        entryList.layoutManager = layoutManager
 
-    @Snippet
-    fun test() {
-        val a = 100
-        val b = 300
-        val c = a + b
-        Log.d("TAG", "test() called$c")
+        adapter.replaceEntryItems(
+            listOf(
+                EntryItem("TypeFace", CustomTypeFaceActivity::class.java)
+            )
+        )
     }
 }
