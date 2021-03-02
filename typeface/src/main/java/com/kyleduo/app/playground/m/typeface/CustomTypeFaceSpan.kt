@@ -12,8 +12,10 @@ import com.kyleduo.app.playground.common.extensions.dp2px
 /**
  * @author kyleduo on 3/2/21
  */
-class CustomTypeFaceSpan(private val drawable: Drawable, private val iconText: String) :
-    ReplacementSpan() {
+class CustomTypeFaceSpan(
+    private val drawable: Drawable,
+    private val iconText: String
+) : ReplacementSpan() {
 
     private val padding = 4.dp2px()
 
@@ -28,7 +30,13 @@ class CustomTypeFaceSpan(private val drawable: Drawable, private val iconText: S
         end: Int,
         fm: Paint.FontMetricsInt?
     ): Int {
-        return (drawable.intrinsicWidth + padding).toInt()
+        if (drawable.bounds.width() == 0 && fm != null) {
+            val lineHeight = fm.bottom - fm.top
+            val width =
+                (lineHeight * 1f / drawable.intrinsicHeight * drawable.intrinsicWidth).toInt()
+            drawable.setBounds(0, 0, width, lineHeight)
+        }
+        return (drawable.bounds.width() + padding).toInt()
     }
 
     override fun draw(
@@ -42,21 +50,17 @@ class CustomTypeFaceSpan(private val drawable: Drawable, private val iconText: S
         bottom: Int,
         paint: Paint
     ) {
-        @Suppress("UnnecessaryVariable")
-        val height = bottom
-        val width = (bottom * 1f / drawable.intrinsicHeight * drawable.intrinsicWidth).toInt()
-
         val count = canvas.save()
-        val yOffset = (bottom - height + 1) / 2
+        val yOffset = (bottom - drawable.bounds.height() + 1) / 2
         canvas.translate(x + padding / 2, yOffset.toFloat())
 
-        drawable.setBounds(0, 0, width, height)
         drawable.draw(canvas)
 
         val testNum = iconText
         val textWidth = paint.measureText(testNum)
 
-        val textX = width * 0.35f + (width * 0.55f - textWidth) * 0.3f
+        val textX =
+            drawable.bounds.width() * 0.35f + (drawable.bounds.width() * 0.55f - textWidth) * 0.3f
         val textY = (y - yOffset).toFloat()
 
         paint.typeface = typeFace
