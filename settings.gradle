@@ -1,3 +1,4 @@
+include ':okio'
 include ':typeface'
 include ':snippetsAnnotations'
 include ':snippetsProcessor'
