@@ -1,3 +1,4 @@
+include ':logcat'
 include ':okio'
 include ':typeface'
 include ':snippetsAnnotations'

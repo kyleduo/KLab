@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyleduo.app.playground.R
 import com.kyleduo.app.playground.common.BaseActivity
+import com.kyleduo.app.playground.logcat.LogcatActivity
 import com.kyleduo.app.playground.m.okio.OkioActivity
 import com.kyleduo.app.playground.m.typeface.CustomTypeFaceActivity
 import com.kyleduo.app.playground.model.EntryItem
@@ -24,7 +25,8 @@ class EntryActivity : BaseActivity() {
         adapter.replaceEntryItems(
                 listOf(
                         EntryItem("TypeFace", CustomTypeFaceActivity::class.java),
-                        EntryItem("Okio", OkioActivity::class.java)
+                        EntryItem("Okio", OkioActivity::class.java),
+                        EntryItem("Logcat", LogcatActivity::class.java)
                 )
         )
     }
