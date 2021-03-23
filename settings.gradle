@@ -1,8 +1,6 @@
 include ':logcat'
 include ':okio'
 include ':typeface'
-include ':snippetsAnnotations'
-include ':snippetsProcessor'
 include ':common'
 rootProject.name='Playground'
 

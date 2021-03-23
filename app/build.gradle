@@ -50,9 +50,6 @@ dependencies {
 
     implementation project(':common')
 
-    kapt project(':snippetsProcessor')
-    implementation project(':snippetsAnnotations')
-
     // modules
     implementation project(':typeface')
     implementation project(':okio')
