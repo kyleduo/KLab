@@ -2,6 +2,6 @@ include ':logcat'
 include ':okio'
 include ':typeface'
 include ':foundation'
-rootProject.name='Playground'
+rootProject.name='KLab'
 
 include ':app'
