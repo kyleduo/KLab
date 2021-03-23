@@ -1,7 +1,7 @@
 include ':logcat'
 include ':okio'
 include ':typeface'
-include ':common'
+include ':foundation'
 rootProject.name='Playground'
 
 include ':app'
