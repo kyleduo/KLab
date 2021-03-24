@@ -34,11 +34,10 @@ android {
 
 dependencies {
     //noinspection GradleDependency
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testImplementation 'junit:junit:4.13.2'
+    implementation Dependencies.kotlinStdLib
 
-    api 'androidx.appcompat:appcompat:1.2.0'
-    api "androidx.core:core-ktx:1.3.2"
-    api 'androidx.recyclerview:recyclerview:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api Dependencies.androidx.appcompat
+    api Dependencies.androidx.coreKtx
+    api Dependencies.androidx.recyclerview
+    api Dependencies.androidx.constraintlayout
 }
