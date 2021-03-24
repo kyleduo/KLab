@@ -7,6 +7,7 @@ import com.kyleduo.app.klab.foundation.BaseActivity
 import com.kyleduo.app.klab.m.logcat.LogcatActivity
 import com.kyleduo.app.klab.m.okio.OkioActivity
 import com.kyleduo.app.klab.m.typeface.CustomTypeFaceActivity
+import com.kyleduo.app.klab.m.window.WindowActivity
 import com.kyleduo.app.klab.model.EntryItem
 import kotlinx.android.synthetic.main.activity_entry.*
 
@@ -23,11 +24,12 @@ class EntryActivity : BaseActivity() {
         entryList.layoutManager = layoutManager
 
         adapter.replaceEntryItems(
-                listOf(
-                        EntryItem("TypeFace", CustomTypeFaceActivity::class.java),
-                        EntryItem("Okio", OkioActivity::class.java),
-                        EntryItem("Logcat", LogcatActivity::class.java)
-                )
+            listOf(
+                EntryItem("TypeFace", CustomTypeFaceActivity::class.java),
+                EntryItem("Okio", OkioActivity::class.java),
+                EntryItem("Logcat", LogcatActivity::class.java),
+                EntryItem("Window", WindowActivity::class.java)
+            )
         )
     }
 }

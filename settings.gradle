@@ -1,3 +1,4 @@
+include ':window'
 include ':logcat'
 include ':okio'
 include ':typeface'
