@@ -1,10 +1,16 @@
 package com.kyleduo.app.klab.m.window
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +23,7 @@ import com.kyleduo.app.klab.foundation.extensions.dp2px
 import kotlinx.android.synthetic.main.activity_window.*
 import java.lang.ref.WeakReference
 import kotlin.random.Random
+
 
 /**
  * @author zhangduo on 3/24/21
@@ -55,6 +62,21 @@ class WindowActivity : BaseActivity() {
         }
 
         showApplicationWindow.setOnClickListener {
+            val hasPermission =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    Settings.canDrawOverlays(applicationContext)
+                } else {
+                    PackageManager.PERMISSION_GRANTED == packageManager.checkPermission(
+                        Manifest.permission.SYSTEM_ALERT_WINDOW,
+                        application.packageName
+                    )
+                }
+            if (!hasPermission) {
+                Toast.makeText(this@WindowActivity, "No Permission", Toast.LENGTH_SHORT).show()
+                requestSettingCanDrawOverlays()
+                return@setOnClickListener
+            }
+
             val wm = application.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -103,6 +125,24 @@ class WindowActivity : BaseActivity() {
         }
         setOnClickListener {
             Toast.makeText(this@WindowActivity, "Click", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @SuppressLint("InlinedApi")
+    private fun requestSettingCanDrawOverlays() {
+        val sdkInt = Build.VERSION.SDK_INT
+        when {
+            sdkInt >= Build.VERSION_CODES.O -> {
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                startActivity(intent)
+            }
+            sdkInt >= Build.VERSION_CODES.M -> {
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                intent.data = Uri.parse("package:${application.packageName}")
+                startActivity(intent)
+            }
+            else -> {
+            }
         }
     }
 }
