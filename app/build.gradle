@@ -53,4 +53,6 @@ dependencies {
     implementation project(':okio')
     implementation project(':logcat')
     implementation project(':window')
+
+    implementation "com.didichuxing.doraemonkit:dokitx:3.3.5"
 }

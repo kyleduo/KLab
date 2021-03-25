@@ -1,6 +1,7 @@
 package com.kyleduo.app.klab
 
 import android.app.Application
+import com.didichuxing.doraemonkit.DoraemonKit
 import com.kyleduo.app.klab.foundation.KLabApp
 
 /**
@@ -12,6 +13,8 @@ class KLabApplication : Application() {
         super.onCreate()
 
         KLabApp.init(this)
+
+        DoraemonKit.install(this)
     }
 
 }
