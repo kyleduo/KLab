@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import com.kyleduo.app.klab.foundation.extensions.dp2px
 import kotlin.math.*
@@ -76,21 +75,24 @@ class SmoothRectView @JvmOverloads constructor(
         val ry = min(cx, cy) / 2 * ry
         val p = 2.0 / n
 
+        // adjust p for cases that rx != ry
+        val px = if (rx > ry) {
+            p * ry / rx
+        } else p
+        val py = if (ry > rx) {
+            p * rx / ry
+        } else p
+
         if (rx == 0f || ry == 0f) {
             return
         }
-        Log.d(TAG, "preparePath: p: $p, w: $w, h: $h, cx: $cx, cy: $cy")
+//        Log.d(TAG, "preparePath: p: $p, w: $w, h: $h, cx: $cx, cy: $cy, rx: $rx, ry: $ry")
 
         // the points is so closed to each other so we can not see the straight line between them
         // when reduce the count to 30, we can see the lines.
         for (a in 0..360) {
-            val x = (cx + rx * signedPow(cos(a / 360.0 * Math.PI * 2), p)).toFloat()
-            val y = (cy + ry * signedPow(sin(a / 360.0 * Math.PI * 2), p)).toFloat()
-            Log.d(TAG, "preparePath: $a, x: $x, y: $y")
-            if (x.isNaN() || y.isNaN()) {
-                Log.d(TAG, "error: p: $p, w: $w, h: $h, cx: $cx, cy: $cy")
-                break
-            }
+            val x = (cx + rx * signedPow(cos(a / 360.0 * Math.PI * 2), px)).toFloat()
+            val y = (cy + ry * signedPow(sin(a / 360.0 * Math.PI * 2), py)).toFloat()
             if (a == 0) {
                 path.moveTo(x, y)
             } else {
