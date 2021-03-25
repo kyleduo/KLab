@@ -6,6 +6,7 @@ import com.kyleduo.app.klab.R
 import com.kyleduo.app.klab.foundation.BaseActivity
 import com.kyleduo.app.klab.m.logcat.LogcatActivity
 import com.kyleduo.app.klab.m.okio.OkioActivity
+import com.kyleduo.app.klab.m.smoothrect.SmoothRectActivity
 import com.kyleduo.app.klab.m.typeface.CustomTypeFaceActivity
 import com.kyleduo.app.klab.m.window.WindowActivity
 import com.kyleduo.app.klab.model.EntryItem
@@ -28,7 +29,8 @@ class EntryActivity : BaseActivity() {
                 EntryItem("TypeFace", CustomTypeFaceActivity::class.java),
                 EntryItem("Okio", OkioActivity::class.java),
                 EntryItem("Logcat", LogcatActivity::class.java),
-                EntryItem("Window", WindowActivity::class.java)
+                EntryItem("Window", WindowActivity::class.java),
+                EntryItem("SmoothRect", SmoothRectActivity::class.java)
             )
         )
     }
