@@ -19,11 +19,11 @@ class SmoothRectActivity : BaseActivity() {
 
         setContentView(R.layout.activity_smooth_rect)
 
-        smoothRect.n = progressToN(nSeekBar.progress)
-        nTv.text = smoothRect.n.toString()
+        smoothRect.power = progressToN(nSeekBar.progress)
+        nTv.text = smoothRect.power.toString()
         nSeekBar.setOnSeekBarChangeListener(ProgressChangedAdapter {
-            smoothRect.n = progressToN(it)
-            nTv.text = smoothRect.n.toString()
+            smoothRect.power = progressToN(it)
+            nTv.text = smoothRect.power.toString()
         })
 
         smoothRect.rx = progressToRadius(rxSeekBar.progress, rxSeekBar.max)

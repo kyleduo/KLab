@@ -4,13 +4,19 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.kyleduo.app.klab.foundation.extensions.dp2px
-import kotlin.math.*
+import com.kyleduo.app.klab.foundation.utils.signedPow
+import com.kyleduo.app.klab.m.smoothrect.path.SuperellipsePath
+import kotlin.math.cos
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.sin
 
 /**
- * @author zhangduo on 3/25/21
+ * @author kyleduo on 3/25/21
  */
 class SmoothRectView @JvmOverloads constructor(
     context: Context?,
@@ -22,6 +28,8 @@ class SmoothRectView @JvmOverloads constructor(
         private const val TAG = "SmoothRectView"
     }
 
+    private val smoothPath = SuperellipsePath(2.5f)
+
     private val paint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = 0xfffed049.toInt()
@@ -31,10 +39,20 @@ class SmoothRectView @JvmOverloads constructor(
         }
     }
 
+    private val paint2 by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = 0x7f3ed049.toInt()
+            style = Paint.Style.FILL
+            strokeWidth = 4.dp2px()
+            strokeJoin = Paint.Join.ROUND
+        }
+    }
+
     private val path = Path()
-    var n: Float = 2f
+    var power: Float = 2f
         set(value) {
             field = value
+            smoothPath.power = field
             invalidate()
         }
 
@@ -59,8 +77,25 @@ class SmoothRectView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         canvas ?: return
 
-        preparePath()
-        canvas.drawPath(path, paint)
+//        preparePath()
+//        canvas.drawPath(path, paint)
+
+        val minSize = min(width, height)
+
+        val w = minSize * 0.5f * rx
+        val h = minSize * 0.5f * ry
+
+        val rx = w * 0.25f
+        val ry = h * 0.25f
+
+        smoothPath.make(w, h, rx, ry)
+
+        canvas.save()
+        canvas.translate((width - w) / 2, (height - h) / 2)
+        canvas.drawPath(smoothPath, paint)
+        canvas.drawRoundRect(RectF(0f, 0f, w, h), rx, ry, paint2)
+        canvas.restore()
+
     }
 
     private fun preparePath() {
@@ -73,7 +108,7 @@ class SmoothRectView @JvmOverloads constructor(
 
         val rx = min(cx, cy) / 2 * rx
         val ry = min(cx, cy) / 2 * ry
-        val p = 2.0 / n
+        val p = if (power > 90f) 0.0 else 2.0 / power
 
         // adjust p for cases that rx != ry
         val px = if (rx > ry) {
@@ -100,9 +135,5 @@ class SmoothRectView @JvmOverloads constructor(
             }
         }
         path.close()
-    }
-
-    private fun signedPow(x: Double, y: Double): Double {
-        return abs(x).pow(y).withSign(x)
     }
 }
