@@ -27,13 +27,13 @@ class SuperellipsePath(
         val ry = cy
 
         // corner radius
-        val crx = min(cornerRadiusX * 1.5f, rx)
-        val cry = min(cornerRadiusY * 1.5f, ry)
+        val crx = min(cornerRadiusX, rx)
+        val cry = min(cornerRadiusY, ry)
 
 //        val rx = min(cx, cy) / 2 * rx
 //        val ry = min(cx, cy) / 2 * ry
 //        val p = if (n > 90f) 0.0 else 2.0 / n
-        val p = 2 / power.toDouble()
+        val p = power.toDouble() / 2
 
         // adjust p for cases that rx != ry
 //        val px = if (rx > ry) {
@@ -42,18 +42,17 @@ class SuperellipsePath(
 //        val py = if (ry > rx) {
 //            p * rx / ry
 //        } else p
-        val px = p; val py = p
+        val px = p * crx / width
+        val py = p * cry / height
 
         if (rx == 0f || ry == 0f) {
             return
         }
 //        Log.d(TAG, "preparePath: p: $p, w: $w, h: $h, cx: $cx, cy: $cy, rx: $rx, ry: $ry")
 
-        for (a in 0..90) {
-            val cxAdjust = width - crx
-            val cyAdjust = height - cry
-            val x = (cxAdjust + crx * signedPow(cos(a / 360.0 * Math.PI * 2), px)).toFloat()
-            val y = (cyAdjust + cry * signedPow(sin(a / 360.0 * Math.PI * 2), py)).toFloat()
+        for (a in 0..360) {
+            val x = (cx + rx * signedPow(cos(a / 360.0 * Math.PI * 2), px)).toFloat()
+            val y = (cy + ry * signedPow(sin(a / 360.0 * Math.PI * 2), py)).toFloat()
             if (a == 0) {
                 moveTo(x, y)
             } else {

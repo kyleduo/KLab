@@ -54,7 +54,7 @@ class SmoothRectActivity : BaseActivity() {
     }
 
     private fun progressToRadius(progress: Int, max: Int): Float {
-        return (progress * 1.0f / max) * 2f
+        return (progress * 1.0f / max)
     }
 
     private fun progressToCornerRadius(progress: Int, max: Int): Float {
