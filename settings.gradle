@@ -1,3 +1,4 @@
+include ':nsd'
 include ':smoothrect'
 include ':window'
 include ':logcat'

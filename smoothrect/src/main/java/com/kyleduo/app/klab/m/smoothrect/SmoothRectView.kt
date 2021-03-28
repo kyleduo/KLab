@@ -34,7 +34,7 @@ class SmoothRectView @JvmOverloads constructor(
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = 0xfffed049.toInt()
             style = Paint.Style.FILL
-            strokeWidth = 4.dp2px()
+            strokeWidth = 4f.dp2px()
             strokeJoin = Paint.Join.ROUND
         }
     }
@@ -43,7 +43,7 @@ class SmoothRectView @JvmOverloads constructor(
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = 0x7f3ed049.toInt()
             style = Paint.Style.FILL
-            strokeWidth = 4.dp2px()
+            strokeWidth = 4f.dp2px()
             strokeJoin = Paint.Join.ROUND
         }
     }
