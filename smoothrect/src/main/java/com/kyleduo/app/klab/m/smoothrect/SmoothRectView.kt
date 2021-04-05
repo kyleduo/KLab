@@ -8,27 +8,27 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.kyleduo.app.klab.foundation.extensions.dp2px
-import com.kyleduo.app.klab.foundation.utils.signedPow
-import com.kyleduo.app.klab.m.smoothrect.path.SuperellipsePath
-import kotlin.math.cos
-import kotlin.math.max
+import com.kyleduo.app.klab.m.smoothrect.path.CubicBezierPath
+import com.kyleduo.app.klab.m.smoothrect.path.AbsSmoothCornerPath
 import kotlin.math.min
-import kotlin.math.sin
 
 /**
  * @author kyleduo on 3/25/21
  */
 class SmoothRectView @JvmOverloads constructor(
-    context: Context?,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context?,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
     companion object {
         private const val TAG = "SmoothRectView"
     }
 
-    private val smoothPath = SuperellipsePath()
+    private val smoothPath: AbsSmoothCornerPath by lazy {
+//        SuperellipsePath()
+        CubicBezierPath()
+    }
 
     private val paint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -41,7 +41,7 @@ class SmoothRectView @JvmOverloads constructor(
 
     private val paint2 by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = 0x7f3ed049.toInt()
+            color = 0xFF0000FF.toInt()
             style = Paint.Style.FILL
             strokeWidth = 4f.dp2px()
             strokeJoin = Paint.Join.ROUND
@@ -49,28 +49,22 @@ class SmoothRectView @JvmOverloads constructor(
     }
 
     private val path = Path()
-    var power: Float = 2f
-        set(value) {
-            field = value
-            smoothPath.power = field
-            invalidate()
-        }
 
-    var rx: Float = 0.5f
+    var widthRatio: Float = 0.5f
         set(value) {
             field = value
             invalidate()
         }
 
-    var ry: Float = 0.5f
+    var heightRatio: Float = 0.5f
         set(value) {
             field = value
             invalidate()
         }
 
-    var radius: Float = 0.5f
+    var cornerRadius: Float = 0.5f
         set(value) {
-            field = min(1f, max(0f, value))
+            field = value
             invalidate()
         }
 
@@ -82,18 +76,18 @@ class SmoothRectView @JvmOverloads constructor(
 
         val minSize = min(width, height)
 
-        val w = minSize * 0.5f
-        val h = minSize * 0.5f
+        val w = minSize * widthRatio
+        val h = minSize * heightRatio
 
-        val rx = w * 0.5f * rx
-        val ry = h * 0.5f * ry
+        val rx = w * 0.5f * cornerRadius
 
-        smoothPath.make(w, h, rx, ry)
+        smoothPath.make(w, h, rx)
 
         canvas.save()
         canvas.translate((width - w) / 2, (height - h) / 2)
+        canvas.drawRoundRect(RectF(0f, 0f, w, h), rx, rx, paint2)
         canvas.drawPath(smoothPath, paint)
-//        canvas.drawRoundRect(RectF(0f, 0f, w, h), rx, ry, paint2)
+//        canvas.drawRect(0f, 0f, w, h, paint2)
         canvas.restore()
 
     }

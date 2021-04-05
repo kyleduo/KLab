@@ -1,7 +1,6 @@
 package com.kyleduo.app.klab.m.smoothrect
 
 import android.os.Bundle
-import android.widget.SeekBar
 import com.kyleduo.app.klab.foundation.BaseActivity
 import kotlinx.android.synthetic.main.activity_smooth_rect.*
 
@@ -19,60 +18,44 @@ class SmoothRectActivity : BaseActivity() {
 
         setContentView(R.layout.activity_smooth_rect)
 
-        smoothRect.power = progressToN(nSeekBar.progress)
-        nTv.text = smoothRect.power.toString()
-        nSeekBar.setOnSeekBarChangeListener(ProgressChangedAdapter {
-            smoothRect.power = progressToN(it)
-            nTv.text = smoothRect.power.toString()
-        })
-
-        smoothRect.rx = progressToRadius(rxSeekBar.progress, rxSeekBar.max)
-        rxTv.text = smoothRect.rx.toString()
-        rxSeekBar.setOnSeekBarChangeListener(ProgressChangedAdapter {
-            smoothRect.rx = progressToRadius(it, rxSeekBar.max)
-            rxTv.text = smoothRect.rx.toString()
-        })
-
-        smoothRect.ry = progressToRadius(rySeekBar.progress, rySeekBar.max)
-        ryTv.text = smoothRect.ry.toString()
-        rySeekBar.setOnSeekBarChangeListener(ProgressChangedAdapter {
-            smoothRect.ry = progressToRadius(it, rySeekBar.max)
-            ryTv.text = smoothRect.ry.toString()
-        })
-
-        smoothRect.radius = progressToCornerRadius(cornerSeekBar.progress, cornerSeekBar.max)
-        cornerTv.text = smoothRect.radius.toString()
-        cornerSeekBar.setOnSeekBarChangeListener(ProgressChangedAdapter {
-            smoothRect.radius = progressToCornerRadius(it, cornerSeekBar.max)
-            cornerTv.text = smoothRect.radius.toString()
-        })
-
-    }
-
-    private fun progressToN(progress: Int): Float {
-        return (0 + 10 * progress.toDouble() / nSeekBar.max).toFloat()
-    }
-
-    private fun progressToRadius(progress: Int, max: Int): Float {
-        return (progress * 1.0f / max)
-    }
-
-    private fun progressToCornerRadius(progress: Int, max: Int): Float {
-        return progress * 1.0f / max
-    }
-
-    class ProgressChangedAdapter(
-        private val handler: ((progress: Int) -> Unit)
-    ) : SeekBar.OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            handler(progress)
+        widthBar.title = "Width"
+        widthBar.progress = 0.5f
+        widthBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
+            override fun onProgressChanged(progress: Float) {
+                smoothRect.widthRatio = progress
+            }
         }
 
-        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+        heightBar.title = "Height"
+        heightBar.progress = 0.5f
+        heightBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
+            override fun onProgressChanged(progress: Float) {
+                smoothRect.heightRatio = progress
+            }
         }
 
-        override fun onStopTrackingTouch(seekBar: SeekBar?) {
-        }
+//        radiusXBar.title = "Radius-X"
+//        radiusXBar.progress = 0.5f
+//        radiusXBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
+//            override fun onProgressChanged(progress: Float) {
+//                smoothRect.cornerRatius = progress
+//            }
+//        }
+//
+//        radiusYBar.title = "Radius-Y"
+//        radiusYBar.progress = 0.5f
+//        radiusYBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
+//            override fun onProgressChanged(progress: Float) {
+//                smoothRect.radiusY = progress
+//            }
+//        }
 
+        radiusBar.title = "Radius-XY"
+        radiusBar.progress = 0.5f
+        radiusBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
+            override fun onProgressChanged(progress: Float) {
+                smoothRect.cornerRadius = progress
+            }
+        }
     }
 }

@@ -32,4 +32,5 @@ dependencies {
     implementation Dependencies.kotlinStdLib
 
     implementation project(':foundation')
+    testImplementation Dependencies.junit
 }
