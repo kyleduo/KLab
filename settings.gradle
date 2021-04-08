@@ -1,3 +1,4 @@
+include ':unittest'
 include ':nsd'
 include ':smoothrect'
 include ':window'
