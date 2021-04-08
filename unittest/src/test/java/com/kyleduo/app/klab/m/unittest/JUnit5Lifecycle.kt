@@ -1,11 +1,13 @@
 package com.kyleduo.app.klab.m.unittest
 
 import org.junit.jupiter.api.*
+import org.junit.jupiter.api.extension.ExtendWith
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Testing Junit5 test lifecycle
  */
+@ExtendWith(LifecycleExtensions::class)
 class JUnit5Lifecycle {
 
     companion object {
