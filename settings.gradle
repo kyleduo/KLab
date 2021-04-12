@@ -1,3 +1,4 @@
+include ':generalui'
 include ':unittest'
 include ':nsd'
 include ':smoothrect'

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyleduo.app.klab.R
 import com.kyleduo.app.klab.foundation.BaseActivity
+import com.kyleduo.app.klab.m.generalui.GeneralUIActivity
 import com.kyleduo.app.klab.m.logcat.LogcatActivity
 import com.kyleduo.app.klab.m.nsd.NsdActivity
 import com.kyleduo.app.klab.m.okio.OkioActivity
@@ -26,14 +27,15 @@ class EntryActivity : BaseActivity() {
         entryList.layoutManager = layoutManager
 
         adapter.replaceEntryItems(
-                listOf(
-                        EntryItem("TypeFace", CustomTypeFaceActivity::class.java),
-                        EntryItem("Okio", OkioActivity::class.java),
-                        EntryItem("Logcat", LogcatActivity::class.java),
-                        EntryItem("Window", WindowActivity::class.java),
-                        EntryItem("SmoothRect", SmoothRectActivity::class.java),
-                        EntryItem("NSD", NsdActivity::class.java)
-                )
+            listOf(
+                EntryItem("General UI", GeneralUIActivity::class.java),
+                EntryItem("TypeFace", CustomTypeFaceActivity::class.java),
+                EntryItem("Okio", OkioActivity::class.java),
+                EntryItem("Logcat", LogcatActivity::class.java),
+                EntryItem("Window", WindowActivity::class.java),
+                EntryItem("SmoothRect", SmoothRectActivity::class.java),
+                EntryItem("NSD", NsdActivity::class.java)
+            )
         )
     }
 }

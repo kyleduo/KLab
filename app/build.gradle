@@ -55,6 +55,7 @@ dependencies {
     implementation project(':window')
     implementation project(':smoothrect')
     implementation project(':nsd')
+    implementation project(':generalui')
 
     implementation "com.didichuxing.doraemonkit:dokitx:3.3.5"
 }
