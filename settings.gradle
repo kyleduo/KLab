@@ -1,3 +1,4 @@
+include ':okhttp'
 include ':generalui'
 include ':unittest'
 include ':nsd'

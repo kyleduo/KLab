@@ -7,6 +7,7 @@ import com.kyleduo.app.klab.foundation.BaseActivity
 import com.kyleduo.app.klab.m.generalui.GeneralUIActivity
 import com.kyleduo.app.klab.m.logcat.LogcatActivity
 import com.kyleduo.app.klab.m.nsd.NsdActivity
+import com.kyleduo.app.klab.m.okhttp.OKHttpActivity
 import com.kyleduo.app.klab.m.okio.OkioActivity
 import com.kyleduo.app.klab.m.smoothrect.SmoothRectActivity
 import com.kyleduo.app.klab.m.typeface.CustomTypeFaceActivity
@@ -34,7 +35,8 @@ class EntryActivity : BaseActivity() {
                 EntryItem("Logcat", LogcatActivity::class.java),
                 EntryItem("Window", WindowActivity::class.java),
                 EntryItem("SmoothRect", SmoothRectActivity::class.java),
-                EntryItem("NSD", NsdActivity::class.java)
+                EntryItem("NSD", NsdActivity::class.java),
+                EntryItem("OkHttp", OKHttpActivity::class.java)
             )
         )
     }

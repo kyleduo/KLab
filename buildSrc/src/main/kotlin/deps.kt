@@ -16,6 +16,7 @@ private object Versions {
     const val lifecycleRuntimeKtx = "2.3.0"
     const val okio = "2.10.0"
     const val multitype = "4.2.0"
+    const val retrofit = "2.9.0"
 }
 
 object Dependencies {
@@ -27,6 +28,9 @@ object Dependencies {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val okio = "com.squareup.okio:okio:${Versions.okio}"
     const val multitype = "com.drakeet.multitype:multitype:${Versions.multitype}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitScalarsConverter = "com.squareup.retrofit2:converter-scalars:${Versions.retrofit}"
+
 
     val androidx = AndroidX()
 
