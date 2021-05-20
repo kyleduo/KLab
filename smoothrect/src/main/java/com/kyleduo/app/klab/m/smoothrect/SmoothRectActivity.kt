@@ -5,7 +5,7 @@ import com.kyleduo.app.klab.foundation.BaseActivity
 import kotlinx.android.synthetic.main.activity_smooth_rect.*
 
 /**
- * @author zhangduo on 3/25/21
+ * @author kyleduo on 3/25/21
  */
 class SmoothRectActivity : BaseActivity() {
 
@@ -33,22 +33,6 @@ class SmoothRectActivity : BaseActivity() {
                 smoothRect.heightRatio = progress
             }
         }
-
-//        radiusXBar.title = "Radius-X"
-//        radiusXBar.progress = 0.5f
-//        radiusXBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
-//            override fun onProgressChanged(progress: Float) {
-//                smoothRect.cornerRatius = progress
-//            }
-//        }
-//
-//        radiusYBar.title = "Radius-Y"
-//        radiusYBar.progress = 0.5f
-//        radiusYBar.onProgressChangedListener = object : TuningBar.OnProgressChangedListener {
-//            override fun onProgressChanged(progress: Float) {
-//                smoothRect.radiusY = progress
-//            }
-//        }
 
         radiusBar.title = "Radius-XY"
         radiusBar.progress = 0.5f
