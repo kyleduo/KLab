@@ -17,6 +17,7 @@ private object Versions {
     const val okio = "2.10.0"
     const val multitype = "4.2.0"
     const val retrofit = "2.9.0"
+    const val mockk = "1.10.6"
 }
 
 object Dependencies {
@@ -30,6 +31,7 @@ object Dependencies {
     const val multitype = "com.drakeet.multitype:multitype:${Versions.multitype}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitScalarsConverter = "com.squareup.retrofit2:converter-scalars:${Versions.retrofit}"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
 
 
     val androidx = AndroidX()

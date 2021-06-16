@@ -38,4 +38,6 @@ dependencies {
     testImplementation Dependencies.junit5JupiterApi
     testImplementation Dependencies.junit5JupiterParams
     testRuntimeOnly Dependencies.junit5JupiterEngine
+
+    testImplementation Dependencies.mockk
 }
