@@ -31,4 +31,8 @@
 
     </LinearLayout>
 
+    <com.kyleduo.app.klab.m.generalui.PathArc
+        android:layout_width="300dp"
+        android:layout_height="200dp" />
+
 </LinearLayout>
